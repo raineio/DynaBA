@@ -1,11 +1,12 @@
 import discord
 import pymongo as mongo
 import time
-    
-token_file = open("token.txt", "r")
+import yaml
 
 bot = discord.Bot()
-token = token_file.read()
+
+with open("config.yml", "r") as ymlfile:
+    config = yaml.load(ymlfile, Loader=yaml.Loader)
 
 @bot.event
 async def on_ready():
@@ -16,23 +17,18 @@ async def HandleDbInteraction():
     print(f'Handled db interaction at {time.time} in unix')
 
 @bot.slash_command()
-async def map(ctx: discord.ApplicationContext):
-    await ctx.respond(discord.Embed("Hydatos Map", "Party portals will be assigned by party leads!\nhttps://i.imgur.com/r9mxDnT.png", color="0x30"))
+async def portal_map(ctx: discord.ApplicationContext):
+    embed = discord.Embed(title = config["portal_map"]["title"], description = "")
+    embed.add_field(name="", value=config["portal_map"]["content"])
+    embed.set_image(url = config["portal_map"]["image"])
+
+    await ctx.respond(embed = embed)
 
 @bot.slash_command()
 async def macros(ctx: discord.ApplicationContext):
-    await ctx.respond(discord.Embed(
-        f"Portal Macros", 
-        f"/macroicon \"Chain Stratagem\"\n"
-        f"/party Portal Assignments!<se.2>\n"
-        f"/party  <1>\n"
-        f"/party  <2>\n"
-        f"/party  <3>\n"
-        f"/party  <4>\n"
-        f"/party  <5>\n"
-        f"/party  <6>\n"
-        f"/party  <7>\n"
-        f"/party  <8>\n"
-        f"<se.6>"))
+    embed = discord.Embed(title=config["portal_assignments"]["title"], description="")
+    embed.add_field(name="", value=config["portal_assignments"]["content"])    
 
-bot.run(token)
+    await ctx.respond(embed = embed)
+
+bot.run(config["token"])
