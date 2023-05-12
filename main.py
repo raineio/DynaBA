@@ -12,10 +12,6 @@ with open("config.yml", "r") as ymlfile:
 async def on_ready():
     print(f'Logged on as user {bot.user} with ID {bot.application_id} and intents {bot.intents}')
 
-async def HandleDbInteraction():
-    mongo.Database.create_collection()
-    print(f'Handled db interaction at {time.time} in unix')
-
 @bot.slash_command()
 async def portal_map(ctx: discord.ApplicationContext):
     embed = discord.Embed(title = config["portal_map"]["title"], description = "")
