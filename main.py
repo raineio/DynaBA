@@ -31,4 +31,11 @@ async def macros(ctx: discord.ApplicationContext):
 
     await ctx.respond(embed = embed)
 
+@bot.slash_command()
+async def first_timer(ctx: discord.ApplicationCommand):
+    embed = discord.Embed(title = config["first_timer"]["title"], description="")
+    embed.add_field(name="", value = config["first_timer"]["content"])
+
+    await ctx.respond(embed = embed)
+
 bot.run(config["token"])
