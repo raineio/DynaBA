@@ -1,5 +1,4 @@
 import discord
-import pymongo as mongo
 import time
 import yaml
 
@@ -31,6 +30,21 @@ async def macros(ctx: discord.ApplicationContext):
 async def first_timer(ctx: discord.ApplicationCommand):
     embed = discord.Embed(title = config["first_timer"]["title"], description="")
     embed.add_field(name="", value = config["first_timer"]["content"])
+
+    await ctx.respond(embed = embed)
+
+@bot.slash_command()
+async def magicite(ctx: discord.ApplicationCommand):
+    embed = discord.Embed(title = config["magia"]["title"], description="")
+    embed.add_field(name="", value = config["magia"]["content"])
+
+    await ctx.respond(embed = embed)
+
+@bot.slash_command()
+async def faeries(ctx: discord.ApplicationCommand):
+    embed = discord.Embed(title = config["faerie_map"]["title"], description="")
+    embed.add_field(name="", value = config["faerie_map"]["content"])
+    embed.set_image(url = config["faerie_map"]["image"])
 
     await ctx.respond(embed = embed)
 
