@@ -1,6 +1,3 @@
-token:
-  YOUR-TOKEN-HERE
-
 portal_assignments: 
   title:
     Portal Assignment Macro
@@ -70,10 +67,3 @@ faerie_map:
   image:
     https://i.imgur.com/dr45wuu.png
 
-spirit_of_the_remembered:
-  title:
-    Spirit of the Remembered
-  description:
-    Explains Remembered Logogram
-  content:
-  

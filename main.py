@@ -4,8 +4,11 @@ import yaml
 
 bot = discord.Bot()
 
-with open("config.yml", "r") as ymlfile:
-    config = yaml.load(ymlfile, Loader = yaml.Loader)
+with open("config.yml", "r") as configfile:
+    config = yaml.load(configfile, Loader = yaml.Loader)
+
+with open("macros.yml", "r") as macrofile:
+    macros = yaml.load(macrofile, Loader = yaml.Loader)
 
 #Unused for now, will add this in later, once BA runs happen
 fun_facts = [
@@ -20,39 +23,39 @@ async def on_ready():
 
 @bot.slash_command()
 async def portal_map(ctx: discord.ApplicationContext):
-    embed = discord.Embed(title = config["portal_map"]["title"], description = config["portal_map"]["description"])
-    embed.add_field(name = "", value=config["portal_map"]["content"])
-    embed.set_image(url = config["portal_map"]["image"])
+    embed = discord.Embed(title = macros["portal_map"]["title"], description = macros["portal_map"]["description"])
+    embed.add_field(name = "", value=macros["portal_map"]["content"])
+    embed.set_image(url = macros["portal_map"]["image"])
 
     await ctx.respond(embed = embed)
 
 @bot.slash_command()
 async def portal_macro(ctx: discord.ApplicationContext):
-    embed = discord.Embed(title=config["portal_assignments"]["title"], description = config["portal_assignments"]["description"])
-    embed.add_field(name = "", value=config["portal_assignments"]["content"])    
+    embed = discord.Embed(title = macros["portal_assignments"]["title"], description = macros["portal_assignments"]["description"])
+    embed.add_field(name = "", value=macros["portal_assignments"]["content"])    
 
     await ctx.respond(embed = embed)
 
 @bot.slash_command()
 async def first_timer(ctx: discord.ApplicationCommand):
-    embed = discord.Embed(title = config["first_timer"]["title"], description = config["first_timer"]["description"])
-    embed.add_field(name = "", value = config["first_timer"]["content"])
+    embed = discord.Embed(title = macros["first_timer"]["title"], description = macros["first_timer"]["description"])
+    embed.add_field(name = "", value = macros["first_timer"]["content"])
 
     await ctx.respond(embed = embed)
 
 @bot.slash_command()
 async def magicite(ctx: discord.ApplicationCommand):
-    embed = discord.Embed(title = config["magia"]["title"], description = config["magia"]["description"])
-    embed.add_field(name = "", value = config["magia"]["content"])
+    embed = discord.Embed(title = macros["magia"]["title"], description = macros["magia"]["description"])
+    embed.add_field(name = "", value = macros["magia"]["content"])
 
     await ctx.respond(embed = embed)
 
 @bot.slash_command()
 async def faeries(ctx: discord.ApplicationCommand):
-    embed = discord.Embed(title = config["faerie_map"]["title"], description = config["faerie_map"]["description"])
-    embed.add_field(name = "", value = config["faerie_map"]["content"])
-    embed.set_image(url = config["faerie_map"]["image"])
+    embed = discord.Embed(title = macros["faerie_map"]["title"], description = macros["faerie_map"]["description"])
+    embed.add_field(name = "", value = macros["faerie_map"]["content"])
+    embed.set_image(url = macros["faerie_map"]["image"])
 
     await ctx.respond(embed = embed)
 
-bot.run(config["token"])
+bot.run(macros["token"])
