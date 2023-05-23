@@ -58,4 +58,4 @@ async def faeries(ctx: discord.ApplicationCommand):
 
     await ctx.respond(embed = embed)
 
-bot.run(macros["token"])
+bot.run(config["token"])
