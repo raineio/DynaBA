@@ -19,12 +19,16 @@ fun_facts = [
 
 @bot.event
 async def on_ready():
+    activity_prompt = "Eureka for suspicious activity"
+    activity = discord.ActivityType.watching
+
+    await bot.change_presence(status = discord.Status.idle, activity = activity)
     print(f'Logged on as user {bot.user} with ID {bot.application_id} and intents {bot.intents}')
 
 @bot.slash_command()
 async def portal_map(ctx: discord.ApplicationContext):
     embed = discord.Embed(title = macros["portal_map"]["title"], description = macros["portal_map"]["description"])
-    embed.add_field(name = "", value=macros["portal_map"]["content"])
+    embed.add_field(name = "", value = macros["portal_map"]["content"])
     embed.set_image(url = macros["portal_map"]["image"])
 
     await ctx.respond(embed = embed)
@@ -32,7 +36,7 @@ async def portal_map(ctx: discord.ApplicationContext):
 @bot.slash_command()
 async def portal_macro(ctx: discord.ApplicationContext):
     embed = discord.Embed(title = macros["portal_assignments"]["title"], description = macros["portal_assignments"]["description"])
-    embed.add_field(name = "", value=macros["portal_assignments"]["content"])    
+    embed.add_field(name = "", value = macros["portal_assignments"]["content"])    
 
     await ctx.respond(embed = embed)
 
