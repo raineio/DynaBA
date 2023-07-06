@@ -2,23 +2,24 @@
 using Discord.Interactions;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.Runtime.InteropServices;
 
 namespace DynaBA;
 
 internal class Program 
 {
-
     public DiscordSocketClient _client;
     public IServiceProvider _services;
-    public Yaml _yaml;
+
+    private bool _run = true;
 
     public static Task Main(string[] args) => new Program().MainAsync();
 
     private async Task MainAsync()
     {
-        var token = _yaml.Load("");
+        var token = Yaml.Parse<Bot>("./token.yml");
 
         _services = ConfigureServices();
 
@@ -29,8 +30,22 @@ internal class Program
             await _services.GetRequiredService<SlashCommandHandler>().InitializeAsync();
         };
 
-        await _client.LoginAsync(TokenType.Bot, token);
+        await _client.LoginAsync(TokenType.Bot, token.Token);
         await _client.StartAsync();
+
+        Console.WriteLine("Ready! Started service.");
+
+        PosixSignalRegistration.Create(PosixSignal.SIGTERM, _ =>
+        {
+            _run = false;
+        });
+        
+        while (_run)
+        {
+            await Task.Delay(1000);
+        }
+
+        await _client.LogoutAsync();
     }
 
     private IServiceProvider ConfigureServices()
@@ -45,21 +60,26 @@ internal class Program
     }
 }
 
-public class Yaml
+public static class Yaml
 {
-    public string Load(string path)
+    private static readonly IDeserializer Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
+    public static T Parse<T>(string ymlFile)
     {
-        var token = "";
-        return token;
+        var ymlString = File.ReadAllText(ymlFile);
+        return Deserializer.Deserialize<T>(ymlString);
     }
+}
 
-    private void Parse()
-    {
+public struct Bot
+{
+    public string Token { get; set; }
+}
 
-    }
-
-    public void Dispose()
-    {
-
-    }
+public struct Macro
+{
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string FieldName { get; set; }
+    public string Content { get; set; }
+    public string? Image { get; set; }
 }
