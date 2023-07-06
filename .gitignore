@@ -2,3 +2,4 @@ config.yml
 /.vs
 /obj
 /bin
+token.yml
