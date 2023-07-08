@@ -1,0 +1,31 @@
+﻿portal_map:
+  title: Hydatos Map
+  description: Shows you what portals to take based on your numbers!
+  content: Party portals will be assigned by party leads!
+  image: https://i.imgur.com/r9mxDnT.png
+
+magia:
+  title: Magicite Configurations
+  description: Magicite is confusing. This clarifies it.
+  content: |
+    Five (5) Magicite - 4 Water 1 Earth 
+    Six (6) Magicite - 5 Water 1 Earth 
+    Seven (7)  Magicite - 5 Water 2 Earth 
+
+    Tanks - 5 Water  0 Earth - use your mitigations 
+  
+    Magia Auto Macros 
+
+    One button: 
+    `/magiaauto` - activate this before we start attacking mobs. This will spin your magia wheel based off of enemies elemental 
+
+    Three buttons: 
+    `/magiaattack` - spin magia to attack 
+    `/magiadefense` - spin magia to defense 
+    `/magiaoff` - turn off auto magia spins
+
+faerie_map:
+  title: Keep it a secret!
+  description: This shows the optimal path when scouting fairies in Hydatos
+  content: Use this route when scouting fairies!
+  image: https://pdp.wildwolf.dev/Eureka/Maps/hydatos_elem.png

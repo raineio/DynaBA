@@ -1,11 +1,8 @@
-portal_assignments: 
-  title:
-    Portal Assignment Macro
-  description:
-    Gives you the macro our party leads use!
+﻿portal_assignments:
+  title: Portal Assignment Macro
+  description: Gives you the macro our party leads use!
   content: |
     ```/macroicon "Chain Stratagem"
-    /macroicon "Chain Stratagem"
     /party Portal Assignments!
     /party 1 <1>
     /party 2 <2>
@@ -14,39 +11,25 @@ portal_assignments:
     /party 5 <5>
     /party 6 <6>
     /party 7 <7>
-    /party 8 <8><se.6>```
-
-portal_map: 
-  title:
-    Hydatos Map
-  description:
-    Shows you what portals to take based on your numbers!
-  content:
-    Party portals will be assigned by party leads!
-  image:
-    https://i.imgur.com/r9mxDnT.png
+    /party 8 <8> <se.6>```
 
 first_timer:
-  title:
-    First time doing BA?
-  description:
-    Post this when running with newcomers
+  title: First time doing BA?
+  description: Post this when running with newcomers
   content: |
     Use the following website to find your Logos Actions!
     https://lynn.pet/ba/
 
 magia:
-  title:
-    Magicite Configurations
-  description:
-    Magicite is confusing. This clarifies it.
+  title: Magicite Configurations
+  description: Magicite is confusing. This clarifies it.
   content: |
     Five (5) Magicite - 4 Water 1 Earth 
     Six (6) Magicite - 5 Water 1 Earth 
     Seven (7)  Magicite - 5 Water 2 Earth 
 
     Tanks - 5 Water  0 Earth - use your mitigations 
-
+    
     Magia Auto Macros 
 
     One button: 
@@ -57,13 +40,8 @@ magia:
     `/magiadefense` - spin magia to defense 
     `/magiaoff` - turn off auto magia spins
 
-faerie_map:
-  title:
-    Keep it a secret!
-  description:
-    This shows the optimal path when scouting fairies in Hydatos
-  content:
-    Use this route when scouting fairies!
-  image:
-    https://i.imgur.com/dr45wuu.png
-
+portal_map:
+  title: Hydatos Map
+  description: Shows you what portals to take based on your numbers!
+  content: Party portals will be assigned by party leads!
+  image: https://i.imgur.com/r9mxDnT.png
