@@ -7,6 +7,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System.Runtime.InteropServices;
 using Discord.Net;
+using DynaBA.Enums;
 using DynaBA.Models;
 using Newtonsoft.Json;
 
@@ -127,6 +128,23 @@ internal class Program
                 .WithDescription(commandArgs.Description)
                 .WithType(ApplicationCommandOptionType.SubCommand));
         }
+        
+        var gearSlashCommandOptionBuilder = new SlashCommandOptionBuilder()
+            .WithName("class")
+            .WithDescription("Gives a choice with different gear types")
+            .WithType(ApplicationCommandOptionType.Integer)
+            .WithRequired(true);
+        
+        foreach (var gearSet in Enum.GetValues<GearType>())
+        {
+            gearSlashCommandOptionBuilder = gearSlashCommandOptionBuilder.AddChoice(gearSet.ToString(), (int)gearSet);
+        }
+        
+        eurekaCommandBuilder.AddOption(new SlashCommandOptionBuilder().WithName("bis")
+            .WithDescription("Shows the best in slot gear for Eureka and the Baldesion Arsenal")
+            .WithType(ApplicationCommandOptionType.SubCommand)
+            .AddOption(gearSlashCommandOptionBuilder)
+        );
         
         try
         {
