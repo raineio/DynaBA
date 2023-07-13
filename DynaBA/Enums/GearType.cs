@@ -1,6 +1,6 @@
 ﻿namespace DynaBA.Enums;
 
-public enum GearType
+public enum GearType : long
 {
     Fending,
     Healing,
