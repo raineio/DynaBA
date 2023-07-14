@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System.Runtime.InteropServices;
+using System.Text;
 using Discord.Net;
 using DynaBA.Enums;
 using DynaBA.Models;
@@ -86,41 +87,66 @@ internal class Program
                     {
                         case "bis":
                             var gearType = (GearType)data.Options.First().Value;
+                            var sb = new StringBuilder();
+                            var titleSb = new StringBuilder();
 
-                            embed.WithTitle($"Eurekan Best in Slot for {gearType}");
-                            
+                            titleSb.Append("Eurekan Best in Slot for ");
+
+                            sb.Append(
+                                """
+                                    There are a few differing opinions on what Best in Slot is, but here is a general primer on what the Eurekan Best in Slot is.
+                                    
+                                    **__First off, why do we want Elemental +2 gear?__**
+
+                                    All jobs want Elemental +2 gear, to varying degrees, because of the elemental bonus you get from it. 
+                                    Healers/Casters want the least of it, considering their Best in Slot chest piece, the Vermilion Cloak, covers their head as well.
+                                
+                                    **__How do I go about getting what I need to get my Best in Slot?__**
+                                    
+                                    Getting Eureka Fragments to upgrade your Elemental +1 gear can only be gotten from the Baldesion Arsenal, of which you get 28 per full run.
+                                    
+                                    Gearset for your job: [etro.gg]
+                                """
+                            );
+
+
                             switch (gearType)
                             {
                                 case GearType.Fending:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Kirin's Osode of Fending.")
-                                        .WithUrl("https://etro.gg/gearset/ccdfa90d-a16c-4b9e-a5b7-c6b0d3df6fea");
+                                    titleSb.Append("Tanks");
+                                    sb.Append("(https://etro.gg/gearset/ccdfa90d-a16c-4b9e-a5b7-c6b0d3df6fea)");
                                     break;
                                 case GearType.Healing:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Vermilion Cloak of Healing.")
-                                        .WithUrl("https://etro.gg/gearset/666db791-128a-43de-ae8a-5b0a89c0fefd");
+                                    titleSb.Append("Healers");
+                                    sb.Append("(https://etro.gg/gearset/666db791-128a-43de-ae8a-5b0a89c0fefd)");
                                     break;
                                 case GearType.Striking:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Kirin's Osode of Scouting.")
-                                        .WithUrl("https://etro.gg/gearset/fcf3ce10-8891-4fe1-9db8-2c2c80be2fd5");
+                                    titleSb.Append("Monk and Samurai");
+                                    sb.Append("(https://etro.gg/gearset/fcf3ce10-8891-4fe1-9db8-2c2c80be2fd5)");
                                     break;
                                 case GearType.Scouting:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Kirin's Osode of Scouting.")
-                                        .WithUrl("https://etro.gg/gearset/cb75f756-9825-4688-a977-9a6ee796988b");
+                                    titleSb.Append("Ninja");
+                                    sb.Append("(https://etro.gg/gearset/cb75f756-9825-4688-a977-9a6ee796988)");
                                     break;
                                 case GearType.Maiming:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Kirin's Osode of Maiming.")
-                                        .WithUrl("https://etro.gg/gearset/88c62a36-8489-4b30-80f1-c8b932bdf15d");
+                                    titleSb.Append("Dragoon and Reaper");
+                                    sb.Append("(https://etro.gg/gearset/88c62a36-8489-4b30-80f1-c8b932bdf15d)");
                                     break;
                                 case GearType.Aiming:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Kirin's Osode of Aiming.")
-                                        .WithUrl("https://etro.gg/gearset/c5ba63fb-a671-4716-b35e-c834c863f8b0");
+                                    titleSb.Append("Ranged");
+                                    sb.Append("(https://etro.gg/gearset/c5ba63fb-a671-4716-b35e-c834c863f8b0)");
                                     break;
                                 case GearType.Casting:
-                                    embed.WithDescription("Elemental +2 gear is your Eureka end-game, alongside the Vermilion Cloak of Casting.")
-                                        .WithUrl("https://etro.gg/gearset/b573db1c-97fa-4c34-9e49-48a6bd59b1ae");
+                                    titleSb.Append("Casters");
+                                    sb.Append("(https://etro.gg/gearset/b573db1c-97fa-4c34-9e49-48a6bd59b1ae");
                                     break;
                             }
-                            
+
+                            sb.Append("\nRemember to look at the notes further down the page!");
+
+
+                            embed.WithTitle(titleSb.ToString()).WithDescription(sb.ToString());
+
                             break;
                     }
 
