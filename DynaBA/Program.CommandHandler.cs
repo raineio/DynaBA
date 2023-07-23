@@ -9,18 +9,20 @@ internal partial class Program
 {
     private async Task ClientOnSlashCommandExecuted(SocketSlashCommand arg)
     {
+        var embed = new EmbedBuilder();
+        
         switch (arg.CommandName)
         {
+
             case "eureka":
                 var data = arg.Data.Options.First();
                 await arg.RespondAsync("thonk");
 
-                var yamlData = Yaml.Parse<Dictionary<string, Eureka>>("eureka.yml");
+                var eurekaData = Yaml.Parse<Dictionary<string, Eureka>>("eureka.yml");
 
-                if (yamlData.TryGetValue(data.Name, out var eurekaCommand))
+                if (eurekaData.TryGetValue(data.Name, out var eurekaCommand))
                 {
-                    var embed = new EmbedBuilder()
-                        .WithTitle(eurekaCommand.Title)
+                    embed.WithTitle(eurekaCommand.Title)
                         .WithDescription(eurekaCommand.Content)
                         .WithImageUrl(eurekaCommand.Image);
 
@@ -32,8 +34,6 @@ internal partial class Program
                 }
                 else
                 {
-                    var embed = new EmbedBuilder();
-
                     switch (data.Name)
                     {
                         case "bis":
@@ -87,8 +87,30 @@ internal partial class Program
                         msg.Embed = embed.Build();
                     });
                 }
+                
+                break;
+            
+            case "ba":
+                var baData = arg.Data.Options.First();
+                await arg.RespondAsync("thonk");
+                
+                var yamlData = Yaml.Parse<Dictionary<string, BaldesionArsenal>>("baldesion.yml");
+
+                if (yamlData.TryGetValue(baData.Name, out var baCommand))
+                {
+                    embed.WithTitle(baCommand.Title)
+                        .WithDescription(baCommand.Content)
+                        .WithImageUrl(baCommand.Image);
+                }
+                
+                await arg.ModifyOriginalResponseAsync(msg =>
+                {
+                    msg.Content = null;
+                    msg.Embed = embed.Build();
+                });
 
                 break;
+            
             case "reboot":
                 await arg.RespondAsync(embed: new EmbedBuilder()
                     .WithTitle("Rebooting...")
@@ -110,5 +132,4 @@ internal partial class Program
                 break;
         }
     }
-
 }
